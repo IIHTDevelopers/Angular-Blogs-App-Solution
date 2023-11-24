@@ -1,0 +1,33 @@
+<a routerLink="/blogs">All Blogs</a>
+<h2>Blog Form</h2>
+<form (submit)="saveBlog()" #blogForm="ngForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" [(ngModel)]="blog.title" name="title" required>
+    <div
+        *ngIf="blogForm.controls['title']?.invalid && (blogForm.controls['title']?.dirty || blogForm.controls['title']?.touched)">
+        Title is required
+    </div>
+    <br>
+    <label for="content">Content:</label>
+    <textarea id="content" [(ngModel)]="blog.content" name="content" required></textarea>
+    <div id="error-content"
+        *ngIf="blogForm.controls['content']?.invalid && (blogForm.controls['content']?.dirty || blogForm.controls['content']?.touched)">
+        Content is required
+    </div>
+    <br>
+    <label for="author">Author:</label>
+    <input type="text" id="author" [(ngModel)]="blog.author" name="author" required>
+    <div id="error-author"
+        *ngIf="blogForm.controls['author']?.invalid && (blogForm.controls['author']?.dirty || blogForm.controls['author']?.touched)">
+        Author is required
+    </div>
+    <br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" [(ngModel)]="blog.date" name="date" required>
+    <div id="error-date"
+        *ngIf="blogForm.controls['date']?.invalid && (blogForm.controls['date']?.dirty || blogForm.controls['date']?.touched)">
+        Date is required
+    </div>
+    <br>
+    <button type="submit">{{ isEditMode ? 'Update' : 'Add' }} Blog</button>
+</form>

@@ -1,0 +1,10 @@
+<a routerLink="/add">Add Blog</a>
+<h2>All Blogs</h2>
+<div *ngFor="let blog of blogs">
+    <h2>{{ blog.title }}</h2>
+    <p>{{ blog.content }}</p>
+    <p>{{ blog.author }}</p>
+    <p *ngIf="blog.date">Date: {{ blog.date | date }}</p>
+    <button (click)="editBlog(blog.id)">Edit</button>
+    <button (click)="deleteBlog(blog.id)">Delete</button>
+</div>
