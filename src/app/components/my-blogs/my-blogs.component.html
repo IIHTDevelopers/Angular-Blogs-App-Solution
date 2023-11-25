@@ -1,0 +1,62 @@
+<div>
+    <h2>My Blogs</h2>
+    <ul>
+        <li *ngFor="let blog of blogs">
+            <h3>{{ blog.title }}</h3>
+            <p>Author: {{ blog.author }}</p>
+            <p>Date: {{ blog.date | date: 'longDate' }}</p>
+            <p>{{ blog.content }}</p>
+            <button (click)="editBlog(blog)">Edit</button>
+            <button (click)="deleteBlog(blog.id)">Delete</button>
+        </li>
+    </ul>
+
+    <div *ngIf="!addingNewBlog">
+        <button (click)="toggleAddForm()">Add Blog</button>
+    </div>
+
+    <div *ngIf="addingNewBlog">
+        <h3>Add New Blog</h3>
+        <div>
+            <label for="blogTitle">Title:</label>
+            <input type="text" id="blogTitle" [(ngModel)]="newBlog.title" />
+        </div>
+        <div>
+            <label for="blogAuthor">Author:</label>
+            <input type="text" id="blogAuthor" [(ngModel)]="newBlog.author" />
+        </div>
+        <div>
+            <label for="blogDate">Date:</label>
+            <input type="date" id="blogDate" [(ngModel)]="newBlog.date" />
+        </div>
+        <div>
+            <label for="blogContent">Content:</label>
+            <textarea id="blogContent" [(ngModel)]="newBlog.content"></textarea>
+        </div>
+        <button (click)="addBlog()"
+            [disabled]="!(newBlog.title && newBlog.author && newBlog.date && newBlog.content)">Add</button>
+        <button (click)="toggleAddForm()">Cancel</button>
+    </div>
+
+    <div *ngIf="editingBlog">
+        <h3>Edit Blog</h3>
+        <div>
+            <label for="editBlogTitle">Title:</label>
+            <input type="text" id="editBlogTitle" [(ngModel)]="editingBlog.title" />
+        </div>
+        <div>
+            <label for="editBlogAuthor">Author:</label>
+            <input type="text" id="editBlogAuthor" [(ngModel)]="editingBlog.author" />
+        </div>
+        <div>
+            <label for="editBlogContent">Content:</label>
+            <textarea id="editBlogContent" [(ngModel)]="editingBlog.content"></textarea>
+        </div>
+        <div>
+            <label for="editBlogDate">Date:</label>
+            <input type="date" id="editBlogDate" [(ngModel)]="editingBlog.date" />
+        </div>
+        <button (click)="updateBlog()">Update</button>
+        <button (click)="cancelEdit()">Cancel</button>
+    </div>
+</div>
