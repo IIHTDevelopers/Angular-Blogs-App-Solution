@@ -1,0 +1,47 @@
+<h1>List of Blogs</h1>
+<ul>
+    <li *ngFor="let blog of blogs">
+        Title: {{ blog.title }}
+        Content: {{ blog.content }}
+        Author: {{ blog.author }}
+        Date: {{ blog.date }}
+        <button (click)="editBlog(blog)">Edit</button>
+        <button (click)="deleteBlog(blog)">Delete</button>
+    </li>
+</ul>
+<button (click)="toggleForm()">Add Blog</button>
+<div *ngIf="showForm">
+    <form (ngSubmit)="saveBlog()" #blogForm="ngForm">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required [(ngModel)]="blogTitle" #title="ngModel">
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                <div *ngIf="title.errors?.['required']">Title is required.</div>
+            </div>
+        </div>
+        <div>
+            <label for="content">Content</label>
+            <textarea id="content" name="content" required [(ngModel)]="blogContent" #content="ngModel"></textarea>
+            <div *ngIf="content.invalid && (content.dirty || content.touched)" class="error">
+                <div *ngIf="content.errors?.['required']">Content is required.</div>
+            </div>
+        </div>
+        <div>
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" required [(ngModel)]="blogAuthor" #author="ngModel">
+            <div *ngIf="author.invalid && (author.dirty || author.touched)" class="error">
+                <div *ngIf="author.errors?.['required']">Author is required.</div>
+            </div>
+        </div>
+        <div>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required [(ngModel)]="blogDate" #dateField="ngModel">
+            <div *ngIf="dateField.invalid && (dateField.dirty || dateField.touched)" class="error">
+                <div *ngIf="dateField.errors?.['required']">Date is required.</div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" [disabled]="blogForm.invalid">Save Blog</button>
+        </div>
+    </form>
+</div>
